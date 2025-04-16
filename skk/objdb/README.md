@@ -4,20 +4,14 @@
 
 该软件使用 MongoDB 来持久化数据，并在 Python 层面利用软件算法模拟出继承等特性。
 
-如果你不需要使用继承、重写等特性，而只是需要一个用来操作 MongoDB 的 ODM，我们为你准备了另一款更合适的工具 —— [mongo](https://github.com/lcctoor/pip/tree/main/skk/mongo) 。
+如果你不需要使用继承、重写等特性，而只是需要一个用来操作 MongoDB 的 ODM，我们为你准备了另一款更合适的工具 —— [mongo](https://github.com/lcctoor/skk/tree/main/skk/mongo) 。
 
-[源码](https://github.com/lcctoor/pip/tree/main/skk/objdb)
+[源码](https://github.com/lcctoor/skk/tree/main/skk/objdb)
 
-# 作者
-
-许灿标
-
-[主页](https://lcctoor.com/index.html) \| [Github](https://github.com/lcctoor) \| [微信](https://lcctoor.com/cdn/WeChatQRC.jpg) \| [邮箱](mailto:lcctoor@outlook.com) \| [捐赠](https://lcctoor.com/cdn/DonationQRC-0rmb.jpg)
-
-# 安装或更新
+# 安装
 
 ```
-pip install --upgrade git+https://github.com/lcctoor/pip.git@main
+pip install skk
 ```
 
 # 教程

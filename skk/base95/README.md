@@ -4,18 +4,12 @@ Base95 是一种用 95 个可见的 ASCII 字符（含空格）表示任意二�
 
 该实现使用了从空格（ASCII 32）到波浪符（ASCII 126）这 95 个字符来编码二进制数据，编码后的信息密度高于 Base64 编码。
 
-[源码](https://github.com/lcctoor/pip/tree/main/skk/base95)
+[源码](https://github.com/lcctoor/skk/tree/main/skk/base95)
 
-# 作者
-
-许灿标
-
-[主页](https://lcctoor.com/index.html) \| [Github](https://github.com/lcctoor) \| [微信](https://lcctoor.com/cdn/WeChatQRC.jpg) \| [邮箱](mailto:lcctoor@outlook.com) \| [捐赠](https://lcctoor.com/cdn/DonationQRC-0rmb.jpg)
-
-# 安装或更新
+# 安装
 
 ```
-pip install --upgrade git+https://github.com/lcctoor/pip.git@main
+pip install skk
 ```
 
 # 教程

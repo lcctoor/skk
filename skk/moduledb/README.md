@@ -2,10 +2,10 @@
 
 为 Python 模块提供数据持久化支持。
 
-# 安装或更新
+# 安装
 
 ```
-pip install --upgrade git+https://github.com/lcctoor/pip.git@main
+pip install skk
 ```
 
 # 导入

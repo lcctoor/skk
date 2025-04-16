@@ -2,18 +2,12 @@
 
 一个优雅的时间模块。
 
-[源码](https://github.com/lcctoor/pip/tree/main/skk/cooltime)
+[源码](https://github.com/lcctoor/skk/tree/main/skk/cooltime)
 
-# 作者
-
-许灿标
-
-[主页](https://lcctoor.com/index.html) \| [Github](https://github.com/lcctoor) \| [微信](https://lcctoor.com/cdn/WeChatQRC.jpg) \| [邮箱](mailto:lcctoor@outlook.com) \| [捐赠](https://lcctoor.com/cdn/DonationQRC-0rmb.jpg)
-
-# 安装或更新
+# 安装
 
 ```
-pip install --upgrade git+https://github.com/lcctoor/pip.git@main
+pip install skk
 ```
 
 # 教程

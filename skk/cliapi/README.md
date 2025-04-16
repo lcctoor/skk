@@ -2,20 +2,14 @@
 
 Cliapi 是一个专为 Python 初学者设计的 WEB 包，目的是让学者能够以非常简单的方式搭建一个 WEB 服务，进而提高对 Python 的兴趣，步入 Python 世界。
 
-[源码](https://github.com/lcctoor/pip/tree/main/skk/cliapi)
+[源码](https://github.com/lcctoor/skk/tree/main/skk/cliapi)
 
-# 作者
-
-许灿标
-
-[主页](https://lcctoor.com/index.html) \| [Github](https://github.com/lcctoor) \| [微信](https://lcctoor.com/cdn/WeChatQRC.jpg) \| [邮箱](mailto:lcctoor@outlook.com) \| [捐赠](https://lcctoor.com/cdn/DonationQRC-0rmb.jpg)
-
-# 安装或更新
+# 安装
 
 在命令行执行：
 
 ```
-pip install --upgrade git+https://github.com/lcctoor/pip.git@main
+pip install skk
 ```
 
 # 教程

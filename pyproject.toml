@@ -4,10 +4,13 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "skk"
-version = "2025.3.9"
-description = "对 Python 常用功能的封装"
-dependencies = ["numpy", "pymysql", "aiomysql", "pymongo", "motor", "pyppeteer", "tornado", "openai", "ollama", "asyncpg"]
+version = "2025.4.14.3"
+description = "对 Python 开发中的常用功能的封装"
+dependencies = ["numpy", "pymysql", "aiomysql", "pymongo", "motor", "tornado", "openai", "asyncpg"]
 
 requires-python = ">=3.12"
 readme = "README.md"
 authors = [{name = "许灿标", email = "lcctoor@outlook.com"}]
+
+[project.scripts]
+skk_excel = "skk.excel:skk_excel_callback"

@@ -2,18 +2,12 @@
 
 ChatGPT 工具包，支持多模态对话（gpt-4o）、连续对话、流式对话（逐字显示）、生成图像（DALL·E）、对话存档与载入、对话回滚、对话伪造、轮询 api_key 池、群聊多角色模拟、限制历史消息数量、异步请求。
 
-[源码](https://github.com/lcctoor/pip/tree/main/skk/openai2)
+[源码](https://github.com/lcctoor/skk/tree/main/skk/openai2)
 
-# 作者
-
-许灿标
-
-[主页](https://lcctoor.com/index.html) \| [Github](https://github.com/lcctoor) \| [微信](https://lcctoor.com/cdn/WeChatQRC.jpg) \| [邮箱](mailto:lcctoor@outlook.com) \| [捐赠](https://lcctoor.com/cdn/DonationQRC-0rmb.jpg)
-
-# 安装或更新
+# 安装
 
 ```
-pip install --upgrade git+https://github.com/lcctoor/pip.git@main
+pip install skk
 ```
 
 # [获取api_key](https://platform.openai.com/account/api-keys)

@@ -4,18 +4,12 @@
 
 有时候，对于某些功能，我们也许希望在不同的环境上采用不同的方案。以访问数据库为例：当程序在外网运行时，须通过数据库公网 ip 访问；而当程序在内网运行时，为了提高性能，我们可以通过数据库内网 ip 访问。
 
-[源码](https://github.com/lcctoor/pip/tree/main/skk/envname)
+[源码](https://github.com/lcctoor/skk/tree/main/skk/envname)
 
-# 作者
-
-许灿标
-
-[主页](https://lcctoor.com/index.html) \| [Github](https://github.com/lcctoor) \| [微信](https://lcctoor.com/cdn/WeChatQRC.jpg) \| [邮箱](mailto:lcctoor@outlook.com) \| [捐赠](https://lcctoor.com/cdn/DonationQRC-0rmb.jpg)
-
-# 安装或更新
+# 安装
 
 ```
-pip install --upgrade git+https://github.com/lcctoor/pip.git@main
+pip install skk
 ```
 
 # 教程

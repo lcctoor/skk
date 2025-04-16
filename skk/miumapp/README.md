@@ -16,18 +16,13 @@
 
 我们所采用的技术栈组合是经过深思熟虑的，通过结合 **Python** 与  **HTML** 这两种高效、灵活、易用的技术栈，意味着你正在选择一个能够大大减少开发时间、简化开发流程、拥有丰富的第三方扩展的解决方案。与其它工具相比，我们的优势在于对新技术的快速适应、更为强大的社区支持，以及持续的更新和改进。
 
-[源码](https://github.com/lcctoor/pip/tree/main/skk/miumapp)
+[源码](https://github.com/lcctoor/skk/tree/main/skk/miumapp)
 
-# 作者
-
-许灿标
-
-[主页](https://lcctoor.com/index.html) \| [Github](https://github.com/lcctoor) \| [微信](https://lcctoor.com/cdn/WeChatQRC.jpg) \| [邮箱](mailto:lcctoor@outlook.com) \| [捐赠](https://lcctoor.com/cdn/DonationQRC-0rmb.jpg)
-
-# 安装或更新
+# 安装
 
 ```
-pip install --upgrade git+https://github.com/lcctoor/pip.git@main
+pip install pyppeteer
+pip install skk
 ```
 
 # 检查是否安装成功
