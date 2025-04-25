@@ -58,7 +58,7 @@ class Sheet:
     def __init__(self, file: File, df: DataFrame):
         self.file = file
         self.df = df
-        self.列 = self.cs = Columns(sheet=self)
+        self.列 = Columns(sheet=self)
     
     def __str__(self): return self.df.__str__()
     def __repr__(self): return self.df.__repr__()
@@ -125,24 +125,21 @@ class Column:
     def __or__(self, other): return self.__class__(self.sheet, self.core | get_column_core(other))  # 并集
     def __invert__(self): return self.__class__(self.sheet, ~ self.core)  # 补集
 
-    def 筛选(self):
-        sheet = self.sheet
-        df = sheet.df[self.core].copy(deep=True)
-        return Sheet(file=sheet.file, df=df)
-
     def 应用(self, 函数):
         core = self.core.apply(函数)
         return self.__class__(self.sheet, core)
-    
-    apply = 应用
-    
-    def 判断(self, 真值, 假值):
-        return self.应用(lambda x: 真值 if x else 假值)
 
-    def 求和(self):
-        return np.array([self.core.sum()]).tolist()[0]
+
+def 求和(self: Column):
+    return np.array([self.core.sum()]).tolist()[0]
+
+def 筛选(self: Column):
+    sheet = self.sheet
+    df = sheet.df[self.core].copy(deep=True)
+    return Sheet(file=sheet.file, df=df)
     
-    sum = 求和
+def 判断(self: Column, 真值, 假值):
+    return self.应用(lambda x: 真值 if x else 假值)
 
 
 class Columns:

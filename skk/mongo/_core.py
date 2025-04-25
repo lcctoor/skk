@@ -2,7 +2,7 @@ from typing import Dict, Literal
 from collections import deque
 from copy import deepcopy
 from pymongo import MongoClient  # 代码提示
-from motor.motor_asyncio import AsyncIOMotorClient  # 代码提示
+from motor.motor_asyncio import AsyncIOMotorClient as motor_client  # 代码提示
 
 
 class TRUE:
@@ -15,9 +15,9 @@ uniset = TRUE()
 empset = FALSE()
 undefined = FALSE()
 
-class ODMIndexError(IndexError):
+class Odm_Index_Error(IndexError):
     def __repr__(self):
-        return 'ODMIndexError'
+        return 'Odm_Index_Error'
 
 
 class ODM():
@@ -32,11 +32,11 @@ class ODM():
         '''
         return MongoClient(host='localhost', port=27017)
     
-    async def amkconn(self):  # 面向未来编程。虽然 AsyncIOMotorClient 是同步方法，但为了未来的可扩展性，这里将 amkconn 定义为异步函数
+    async def amkconn(self):  # 面向未来编程。虽然 motor_client 是同步方法，但为了未来的可扩展性，这里将 amkconn 定义为异步函数
         '''
         请在子类中覆盖此方法
         '''
-        return AsyncIOMotorClient(host='localhost', port=27017)
+        return motor_client(host='localhost', port=27017)
     
     def get_conn(self):
         class core():
@@ -215,7 +215,7 @@ class Sheet():
                 return sheet.insert_many( data )  # r.acknowledged, r.inserted_ids
 
     def _for_tip(self):
-        x: 'AsyncIOMotorClient'  # 查看代码提示是否生效
+        x: 'motor_client'  # 查看代码提示是否生效
 
     async def ainsert(self, *data: dict):
         if self._for_tip(): return self.insert( *data )  # 引导 vscode 产生代码提示
@@ -231,7 +231,7 @@ class Sheet():
         if type(key) is int:
             index = key
             if index < 0: index = self.len() + index + 1  # R索引
-            if index < 1: raise ODMIndexError(f"index({key}) out of range")
+            if index < 1: raise Odm_Index_Error(f"index({key}) out of range")
             skip = index - 1
             with self.parent.parent.get_conn() as conn:
                 sheet = conn[self.parent.db_name][self.sheet_name]
@@ -242,7 +242,7 @@ class Sheet():
                 if r := list(res.limit(1)):
                     return r[0]
                 else:
-                    raise ODMIndexError(f"index({key}) out of range")  # 没有的话引发ODMIndexError错误. 已被self.update和self.delete调用
+                    raise Odm_Index_Error(f"index({key}) out of range")  # 没有的话引发Odm_Index_Error错误. 已被self.update和self.delete调用
         else:
             # 没有的话返回空列表, 但不要报错. 已被self.update和self.delete调用
             L, R, S = key[0], key[1], key[2] or 1
@@ -279,13 +279,19 @@ class Sheet():
             else:
                 return []
     
+    async def aget(self, default=None):
+        try:
+            return await self.afind()
+        except Odm_Index_Error:
+            return default
+
     async def afind(self):
         if self._for_tip(): return self.find()  # 引导 vscode 产生代码提示
         key = self._parse_slice()
         if type(key) is int:
             index = key
             if index < 0: index = await self.alen() + index + 1
-            if index < 1: raise ODMIndexError(f"index({key}) out of range")
+            if index < 1: raise Odm_Index_Error(f"index({key}) out of range")
             skip = index - 1
             async with self.parent.parent.get_conn() as conn:
                 sheet = conn[self.parent.db_name][self.sheet_name]
@@ -296,7 +302,7 @@ class Sheet():
                 if r := await res.limit(1).to_list(1):
                     return r[0]
                 else:
-                    raise ODMIndexError(f"index({key}) out of range")
+                    raise Odm_Index_Error(f"index({key}) out of range")
         else:
             L, R, S = key[0], key[1], key[2] or 1
             tL, tR, tS = type(L), type(R), type(S)
@@ -368,7 +374,7 @@ class Sheet():
             # 其它情况
             try:
                 ids = self['_id'][self._condition['slice']].find()
-            except ODMIndexError:  # 说明key是int而非切片，且找不到符合条件的
+            except Odm_Index_Error:  # 说明key是int而非切片，且找不到符合条件的
                 return sheet.update_one(empsetCondi, data_, upsert=upsert)
             else:
                 if isinstance(ids, list):
@@ -414,7 +420,7 @@ class Sheet():
             # 其它情况
             try:
                 ids = await self['_id'][self._condition['slice']].afind()
-            except ODMIndexError:
+            except Odm_Index_Error:
                 return await sheet.update_one(empsetCondi, data_, upsert=upsert)
             else:
                 if isinstance(ids, list):
@@ -444,7 +450,7 @@ class Sheet():
             # 其它索引
             try:
                 ids = self['_id'][self._condition['slice']].find()
-            except ODMIndexError:  # 说明key是int而非切片，且找不到符合条件的
+            except Odm_Index_Error:  # 说明key是int而非切片，且找不到符合条件的
                 return sheet.delete_one( Factory(empset).ParseWhere() )
             else:
                 if isinstance(ids, list):
@@ -469,7 +475,7 @@ class Sheet():
             # 其它索引
             try:
                 ids = await self['_id'][self._condition['slice']].afind()
-            except ODMIndexError:  # 说明key是int而非切片，且找不到符合条件的
+            except Odm_Index_Error:  # 说明key是int而非切片，且找不到符合条件的
                 return await sheet.delete_one( Factory(empset).ParseWhere() )
             else:
                 if isinstance(ids, list):

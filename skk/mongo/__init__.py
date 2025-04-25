@@ -1,1 +1,1 @@
-from ._core import ODM, mc, mf, mo, ODMIndexError
+from ._core import ODM, mc, mf, mo, Odm_Index_Error

@@ -4,36 +4,36 @@
 
 [源码](https://github.com/lcctoor/skk/tree/main/skk/mongo)
 
-# 安装
+# 教程
+
+本文将以简洁的方式向你介绍核心知识，而不会让你被繁琐的术语所淹没。
+
+## 安装
 
 ```
 pip install skk
 ```
 
-# 教程
-
-本文将以简洁的方式向你介绍核心知识，而不会让你被繁琐的术语所淹没。
-
 ## 导入
 
 ```python
-from pymongo import MongoClient
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import MongoClient as mongo_client
+from motor.motor_asyncio import AsyncIOMotorClient as motor_client
 from skk.mongo import ODM, mc, mf, mo
 ```
 
 ## 创建ODM
 
 ```python
-class ODM_2(ODM):
+class My_ODM(ODM):
 
     def mkconn(self):  # 定义同步连接器
-        return MongoClient(host='localhost', port=27017)
+        return mongo_client(host='localhost', port=27017)
   
     async def amkconn(self):  # 定义异步连接器
-        return AsyncIOMotorClient(host='localhost', port=27017)
+        return motor_client(host='localhost', port=27017)
 
-odm = ODM_2()          # 账户ODM
+odm = My_ODM()          # 账户ODM
 db = odm['泉州市']      # 库ODM
 sheet = db['希望小学']  # 表ODM
 ```
@@ -57,11 +57,11 @@ row6 = {'姓名':'小六', '年龄':16, '幸运数字':[6, 7, 8], '成绩':{'语
 
 |            | 同步方式                      | 异步方式                                                 |
 | :---------: | ----------------------------- | -------------------------------------------------------- |
-| 增（1 条） | sheet.insert( row1 )          | **await** sheet.**a**insert( row2 )          |
-| 增（批量） | sheet.insert( row3, row4 )    | **await** sheet.**a**insert( row5, row6 )    |
-|     查     | sheet.find( )                 | **await** sheet.**a**find( )                 |
-|     改     | sheet.update( {'年龄': 100} ) | **await** sheet.**a**update( {'年龄': 200} ) |
-|     删     | sheet.delete( )               | **await** sheet.**a**delete( )               |
+| 增（1 条） | sheet.insert( row1 )          | await sheet.ainsert( row2 )          |
+| 增（批量） | sheet.insert( row3, row4 )    | await sheet.ainsert( row5, row6 )    |
+|     查     | sheet.find( )                 | await sheet.afind( )                 |
+|     改     | sheet.update( {'年龄': 100} ) | await sheet.aupdate( {'年龄': 200} ) |
+|     删     | sheet.delete( )               | await sheet.adelete( )               |
 
 ### 新增时，查看分配到的主键：
 
@@ -308,14 +308,14 @@ sheet[mc.年级=='高一']['姓名'][None].find()
 
 |                        | 同步方式                    | 异步方式                                               |
 | ---------------------- | --------------------------- | ------------------------------------------------------ |
-| 统计库的数量           | odm.len( )                  | **await** odm.**a**len( )                  |
-| 统计表的数量           | db.len( )                   | **await** db.**a**len( )                   |
-| 统计行的数量           | sheet.len( )                | **await** sheet.**a**len( )                |
-| 统计符合条件的行的数量 | sheet[ mc.age > 8 ].len( ) | **await** sheet[ mc.age > 8 ].**a**len( ) |
-| 获取库名清单           | odm.get_db_names( )         | **await** odm.**a**get_db_names( )         |
-| 获取表名清单           | db.get_sheet_names( )       | **await** db.**a**get_sheet_names( )       |
-| 删除某个库             | db.delete_db( )             | **await** db.**a**delete_db( )            |
-| 删除某张表             | sheet.delete_sheet( )       | **await** sheet.**a**delete_sheet( )      |
+| 统计库的数量           | odm.len( )                  | await odm.alen( )                  |
+| 统计表的数量           | db.len( )                   | await db.alen( )                   |
+| 统计行的数量           | sheet.len( )                | await sheet.alen( )                |
+| 统计符合条件的行的数量 | sheet[ mc.age > 8 ].len( ) | await sheet[ mc.age > 8 ].alen( ) |
+| 获取库名清单           | odm.get_db_names( )         | await odm.aget_db_names( )         |
+| 获取表名清单           | db.get_sheet_names( )       | await db.aget_sheet_names( )       |
+| 删除某个库             | db.delete_db( )             | await db.adelete_db( )            |
+| 删除某张表             | sheet.delete_sheet( )       | await sheet.adelete_sheet( )      |
 
 ## 迭代所有 库ODM 和 表ODM
 
