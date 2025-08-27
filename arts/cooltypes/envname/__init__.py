@@ -1,1 +1,0 @@
-from ._core import set_environment_name, read_environment_name

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Demo</title>  <!-- APP 将使用此名称作为窗口名称 -->
+    <link rel="icon" href="demo.ico" type="image/x-icon">  <!-- APP 将使用此图标作为窗口图标 -->
+    <style>
+        body {font-family: 'Arial', sans-serif; background-color: #f6f9fc; color: #4a4a4a; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh;}
+        .menu-bar {background: linear-gradient(45deg, #ffffff, #f5f7fa); padding: 0.5em 2em; display: flex; border-bottom: 2px solid #e8e8e8; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);}
+        .menu-item {margin-right: 2em; cursor: pointer; padding: 0.2em 0.5em; border-radius: 4px; transition: background-color 0.3s;}
+        .menu-item:hover {background-color: #f0f2f5;}
+        .side-nav {width: 15%; background: linear-gradient(45deg, #ffffff, #f5f7fa); padding: 2em; border-right: 2px solid #e8e8e8; box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.05); transition: background 0.3s;}
+        .side-nav:hover {background: linear-gradient(45deg, #f5f7fa, #ffffff);}
+        .nav-item {margin-bottom: 1.5em; cursor: pointer; padding: 0.5em 0.2em; transition: all 0.3s; border-radius: 4px; display: flex; align-items: center;}
+        .nav-item:hover {background-color: #f0f2f5; color: #007BFF; transform: translateX(10px);}
+        .nav-icon {margin-right: 1em;}
+        .main-content {flex: 2; padding: 2em; overflow-y: auto; background: linear-gradient(45deg, #f5f7fa, #ffffff);}
+        h1 {font-size: 28px; margin-bottom: 1.5em; color: #007BFF;}
+        p {font-size: 18px; line-height: 1.8; margin-bottom: 1.5em;}
+        strong {color: #007BFF;}
+        .app-container {display: flex; flex: 1;}
+        .third-column {flex: 1; padding: 2em; background: linear-gradient(45deg, #f5f7fa, #ffffff); border-left: 2px solid #e8e8e8;}
+        .input-field, .btn-field {margin-bottom: 1em;}
+        h3 {color: rgb(218, 150, 16);}
+    </style>
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="menu-item">📁 文件</div>
+        <div class="menu-item">✂️ 编辑</div>
+        <div class="menu-item">👁️ 视图</div>
+        <div class="menu-item">❓ 帮助</div>
+    </div>
+    <div class="app-container">
+        <div class="side-nav">
+            <div class="nav-item"><span class="nav-icon">🏠</span> 仪表盘</div>
+            <div class="nav-item"><span class="nav-icon">⚙️</span> 设置</div>
+            <div class="nav-item"><span class="nav-icon">📖</span> 关于</div>
+        </div>
+        <div class="main-content">
+            <h1>欢迎使用 miumapp !</h1>
+            <p>我们所采用的技术栈组合是经过深思熟虑的，通过结合 <strong>Python</strong> 与 <strong>HTML</strong> 这两种高效、灵活、易用的技术栈，意味着你正在选择一个能够大大减少开发时间、简化开发流程、拥有丰富的第三方扩展的解决方案。与其它工具相比，我们的优势在于对新技术的快速适应、更为强大的社区支持，以及持续的更新和改进。</p>
+        </div>
+        <div class="third-column">
+            <h1>试一下：触发后端</h1>
+            <h3>计算某月的天数</h3>
+            <div class="input-field">
+                年份: <input type="text" id="yearInput">
+                <br>
+                月份: <input type="text" id="monthInput">
+            </div>
+            <div class="btn-field"><button onclick="get_days()">计算天数（调用后端方法）</button></div>
+            <div>当月天数: <span id="daysResult"></span></div>
+            <br/>
+            <h3>创建新窗口</h3>
+            <button onclick="miumapp.callpy(method='CreatTempWindow_8_seconds')">创建 1 个新窗口，并于 8 秒后自动关闭</button>
+            <br/><br/>
+            <button onclick="miumapp.callpy(method='CreatTempWindow')">创建 1 个新窗口，不自动关闭</button>
+        </div>
+    </div>
+    <script>
+        async function get_days() {
+            // 触发后端函数
+            let r = await miumapp.callpy(
+                method = 'ComputeDays',
+                kwargs = {
+                    year: document.getElementById('yearInput').value,
+                    month: document.getElementById('monthInput').value
+                }
+            )
+            // 显示后端返回的结果
+            document.getElementById('daysResult').innerText = r['data'] || JSON.stringify(r)
+        }
+    </script>
+</body>
+</html>

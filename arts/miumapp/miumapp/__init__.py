@@ -1,1 +1,0 @@
-from arts.miumapp._core import App, allow_callpy
